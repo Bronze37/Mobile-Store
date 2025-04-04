@@ -1,7 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('@config/sequelize');
 
-// Định nghĩa model Product
 const Product = sequelize.define('Product', {
     id: {
         type: DataTypes.INTEGER,
@@ -14,7 +13,8 @@ const Product = sequelize.define('Product', {
     },
     model: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     price: {
         type: DataTypes.FLOAT,
@@ -27,10 +27,14 @@ const Product = sequelize.define('Product', {
     os: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
     }
 }, {
-    tableName: 'mobile',
+    tableName: 'products',
     timestamps: false
-})
+});
 
 module.exports = Product;
