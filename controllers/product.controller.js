@@ -2,6 +2,9 @@ const productService = require('@services/product.service');
 
 // Lấy tất cả sản phẩm
 const getAllProducts = async (req, res) => {
+    if (!req.user) {
+        return res.status(401).json({ error: 'Unauthorized' });
+    }
     try {
         const products = await productService.getAllProducts();
         return res.status(200).json(products);

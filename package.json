@@ -13,6 +13,7 @@
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "module-alias": "^2.2.3",
     "mysql2": "^3.14.0",
     "sequelize": "^6.37.7"
@@ -23,6 +24,7 @@
     "@models": "./models",
     "@routes": "./routes",
     "@middlewares": "./middlewares",
-    "@services": "./services"
+    "@services": "./services",
+    "@auth": "./auth"
   }
 }

@@ -2,12 +2,14 @@ require('module-alias/register');
 const express = require('express');
 const sequelize = require('@config/sequelize');
 const router = require('@routes/index');
+const authRouter = require('@auth/auth.route');
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/api', router);
+app.use('/auth', authRouter);
 
 sequelize.authenticate()
     .then(() => {

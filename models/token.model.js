@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
-const User = require('./user.model'); // Import model User
 
 const Token = sequelize.define('Token', {
     id: {
@@ -12,22 +11,17 @@ const Token = sequelize.define('Token', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    userId: {
+    user_id: { 
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: User,
-            key: 'id',
-        },
-        onDelete: 'CASCADE',
     },
-    expiresAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
+    revoked: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
     },
 }, {
     tableName: 'tokens',
-    timestamps: true,
+    timestamps: false,
 });
 
 module.exports = Token;

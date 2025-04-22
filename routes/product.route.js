@@ -1,9 +1,10 @@
 const express = require('express');
 const { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct } = require('@controllers/product.controller');
+const authorizationMiddleware = require('@auth/auth.middleware');
 
 const router = express.Router();
 
-router.get('/', getAllProducts);
+router.get('/', authorizationMiddleware, getAllProducts);
 router.get('/:id', getProductById);
 router.post('/add', addProduct);
 router.patch('/update/:id', updateProduct)
