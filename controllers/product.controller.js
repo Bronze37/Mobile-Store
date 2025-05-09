@@ -1,12 +1,9 @@
 const productService = require('@services/product.service');
 
 // Lấy tất cả sản phẩm
-const getAllProducts = async (req, res) => {
-    if (!req.user) {
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
+const getProductsByFilters = async (req, res) => {
     try {
-        const products = await productService.getAllProducts();
+        const products = await productService.getProductsByFilters(req.query);
         return res.status(200).json(products);
     } catch (err) {
         console.error('Error fetching products:', err);
@@ -79,4 +76,4 @@ const deleteProduct = async (req, res) => {
     }
 }
 
-module.exports = { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct };
+module.exports = { getProductsByFilters, getProductById, addProduct, updateProduct, deleteProduct };

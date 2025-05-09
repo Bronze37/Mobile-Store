@@ -1,10 +1,34 @@
 const Product = require('@models/product.model');
 const Category = require('@models/category.model');
+const { Op } = require('sequelize');
 
 // Hàm lấy tất cả sản phẩm
-const getAllProducts = async () => {
+const getProductsByFilters = async (filters) => {
     try {
+        const whereClause = {};
+        
+        // Xử lý các điều kiện lọc
+        if (filters.brand) {
+            whereClause.brand = filters.brand;
+        }
+        if (filters.minPrice) {
+            whereClause.price = { [Op.gte]: filters.minPrice };
+        }
+        if (filters.maxPrice) {
+            whereClause.price = { ...whereClause.price, [Op.lte]: filters.maxPrice };
+        }
+        if (filters.storage_capacity) {
+            whereClause.storage_capacity = filters.storage_capacity;
+        }
+        if (filters.os) {
+            whereClause.os = filters.os;
+        }
+        if (filters.categoryId) {
+            whereClause.categoryId = filters.categoryId;
+        }
+
         const products = await Product.findAll({
+            where: whereClause,
             include: {
                 model: Category,
                 as: 'category',
@@ -85,4 +109,4 @@ const deleteProduct = async (id) => {
     }
 }
 
-module.exports = { getAllProducts, getProductById, addProduct, updateProduct, deleteProduct };
+module.exports = { getProductsByFilters, getProductById, addProduct, updateProduct, deleteProduct };

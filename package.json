@@ -26,5 +26,8 @@
     "@middlewares": "./middlewares",
     "@services": "./services",
     "@auth": "./auth"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
