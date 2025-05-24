@@ -1,5 +1,5 @@
 const User = require('@models/user.model');
-const Token = require('@models/token.model');
+const Token = require('@auth/token.model');
 const { generateToken } = require('@auth/auth.utils');
 
 const login = async (username, password) => {
@@ -8,7 +8,7 @@ const login = async (username, password) => {
 
     if (user.password !== password) throw new Error('Invalid password');
 
-    const token = generateToken(user.username, user.role);
+    const token = generateToken(user.user_id, user.role);
 
     Token.create({
         token,

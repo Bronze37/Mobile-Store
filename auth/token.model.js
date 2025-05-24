@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/sequelize');
+const sequelize = require('@config/sequelize');
+const User = require('../models/user.model');
 
 const Token = sequelize.define('Token', {
     id: {
@@ -14,6 +15,11 @@ const Token = sequelize.define('Token', {
     user_id: { 
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+              model: User,
+              key: 'id'
+            },
+        onDelete: 'CASCADE'
     },
     revoked: {
         type: DataTypes.BOOLEAN,

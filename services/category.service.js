@@ -1,6 +1,5 @@
 const Product = require('@models/product.model');
 const Category = require('@models/category.model');
-const { get } = require('../routes/category.route');
 
 const getAllCategories = async () => {
     try {

@@ -1,7 +1,5 @@
 const sequelize = require('@config/sequelize');
 const { DataTypes } = require('sequelize');
-const Token = require('@models/token.model');
-
 
 const User = sequelize.define('User', {
     id: {
@@ -25,16 +23,6 @@ const User = sequelize.define('User', {
 }, {
     tableName: 'users',
     timestamps: false
-});
-
-User.hasMany(Token, {
-    foreignKey: 'user_id',
-    as: 'tokens' 
-});
-
-Token.belongsTo(User, {
-    foreignKey: 'user_id',
-    as: 'user'
 });
 
 module.exports = User;

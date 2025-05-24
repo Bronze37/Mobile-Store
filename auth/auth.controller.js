@@ -19,4 +19,14 @@ const register = async (req, res) => {
     }
 };
 
-module.exports = { login, register };
+const logout = async (req, res) => {
+    try {
+        const token = req.headers.authorization.split(' ')[1];
+        await authService.logout(token);
+        return res.status(200).json({ message: 'Logged out successfully' });
+    } catch (error) {
+        return res.status(401).json({ error: error.message });
+    }
+}
+
+module.exports = { login, register, logout };

@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('@config/sequelize');
+const Category = require('./category.model');
 
 const Product = sequelize.define('Product', {
     id: {
@@ -31,6 +32,11 @@ const Product = sequelize.define('Product', {
     category_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+              model: Category,
+              key: 'id'
+            },
+        onDelete: 'CASCADE'
     }
 }, {
     tableName: 'products',

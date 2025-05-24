@@ -6,8 +6,12 @@ const { Op } = require('sequelize');
 const getProductsByFilters = async (filters) => {
     try {
         const whereClause = {};
+        if (filters.model) {
+            whereClause.model = {
+                [Op.like]: `%${filters.model}%`,
+            };
+        }
         
-        // Xử lý các điều kiện lọc
         if (filters.brand) {
             whereClause.brand = filters.brand;
         }
